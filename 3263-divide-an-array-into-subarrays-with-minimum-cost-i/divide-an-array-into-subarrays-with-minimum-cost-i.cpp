@@ -1,17 +1,16 @@
 class Solution {
 public:
     int minimumCost(vector<int>& nums) {
-        int n=nums.size();
-        int minSum=INT_MAX;
-        for(int i=0;i<n-2;i++){
-            for(int j=i+1;j<n-1;j++){
-               vector<int> A(nums.begin(), nums.begin()+i+1); 
-               vector<int> B(nums.begin()+i+1, nums.begin()+j+1);
-               vector<int> C(nums.begin()+j+1, nums.end());
-               int sum=A[0]+B[0]+C[0];
-               minSum=min(sum,minSum);
-            }
+       int first=INT_MAX;
+       int second=INT_MAX;
+       for(int i=1;i<nums.size();i++){
+        if(nums[i]<first){
+            second=first;
+            first=nums[i];
+        }else if(nums[i]<second){
+            second=nums[i];
         }
-        return minSum;
+       }
+       return nums[0]+first+second;
     }
 };
